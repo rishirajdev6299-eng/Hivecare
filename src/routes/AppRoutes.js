@@ -12,6 +12,7 @@ import PrivacyPolicy from "../pages/Privacy/PrivacyPolicy";
 import Layout from "../components/Layout/Layout";
 import ProtectedRoute from "./ProtectedRoute";
 import History from "../pages/bookHistory/history";
+import Profile from "../pages/Profile/Profile";
 
 function AppRoutes() {
   return (
@@ -39,6 +40,8 @@ function AppRoutes() {
       <Route path="/about" element={<AboutUs />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/profile" element={<Profile />} />
+
     </Routes>
   );
 }

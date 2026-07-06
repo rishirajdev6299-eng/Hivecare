@@ -10,6 +10,8 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [phone, setPhone] = useState("");
+const [address, setAddress] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +21,9 @@ function Register() {
       const response = await registerUser({
         name,
         email,
-        password
+        password,
+        phone,
+        address
       });
       
       alert("Registration Successful!");
@@ -86,6 +90,26 @@ function Register() {
                   />
                   {emailError && <small className="text-danger">{emailError}</small>}
                 </div>
+                <div className="mb-3">
+  <label>Phone Number</label>
+
+  <input
+    type="text"
+    className="form-control"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+  />
+</div>
+
+<div className="mb-3">
+  <label>Address</label>
+
+  <textarea
+    className="form-control"
+    value={address}
+    onChange={(e) => setAddress(e.target.value)}
+  />
+</div>
 
                 <div className="mb-4">
                   <label className="form-label">

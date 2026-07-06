@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   getBookings,
   getServices,
@@ -13,7 +14,7 @@ import { useLocation } from "react-router-dom";
 
 function MyBookings() {
   const location = useLocation();
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     address: "",
@@ -169,6 +170,8 @@ const response = await createBooking(
         ]);
 
         setMessage("Booking successful");
+        alert("Booking successful! ");
+        navigate("/services");
       }
 
       setFormData({

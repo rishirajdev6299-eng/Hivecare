@@ -19,3 +19,8 @@ export const getUserBookings = (userId) =>
 // Users
 export const registerUser = (user) => axios.post(`${API_BASE}/users/register`, user);
 export const loginUser = (credentials) => axios.post(`${API_BASE}/users/login`, credentials);
+export const getUserById = (id) =>
+    axios.get(`${API_BASE}/users/${id}`);
+
+export const updateUser = (id,user) =>
+    axios.put(`${API_BASE}/users/${id}`,user);

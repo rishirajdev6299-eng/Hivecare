@@ -7,7 +7,7 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [showProfile, setShowProfile] = useState(false);
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -37,6 +37,7 @@ function Navbar() {
   }, []);
 
   return (
+    <>
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="navbar-brand">
         <img
@@ -83,20 +84,23 @@ function Navbar() {
         <Link to="/history" onClick={() => setMenuOpen(false)}>
           My Bookings
         </Link>
+      
 
         {user ? (
           <>
- <div className="user-section">
-  <span className="user-name">
-    <i className="bi bi-person-circle"></i> {user.name}
-  </span>
+ <div className="profile-container">
 
   <button
-    className="btn btn-danger logout-btn"
-    onClick={handleLogout}
+    className="profile-btn"
+    onClick={() => {setShowProfile(!showProfile); setMenuOpen(false)}}
   >
-    <i className="bi bi-power"></i> 
+    <i className="bi bi-person-circle"></i>
+    {user.name}
+    <i className="bi bi-caret-down-fill ms-2"></i>
   </button>
+
+ 
+
 </div>
           </>
         ) : (
@@ -111,7 +115,61 @@ function Navbar() {
           </>
         )}
       </div>
+    
     </nav>
+    {user && showProfile && (
+    <div className="profile-dropdown">
+
+     <div className="profile-info">
+
+  
+
+  <p className="mb-3">
+    <i className="bi bi-envelope-fill me-2 text-primary"></i>
+    <strong>Email:</strong><br />
+    {user.email}
+  </p>
+
+  <p className="mb-3">
+    <i className="bi bi-telephone-fill me-2 text-success"></i>
+    <strong>Phone:</strong><br />
+    {user.phone}
+  </p>
+
+  <p className="mb-3">
+    <i className="bi bi-geo-alt-fill me-2 text-danger"></i>
+    <strong>Address:</strong><br />
+    {user.address}
+  </p>
+
+</div>
+
+      <hr />
+
+      <Link
+        to="/profile"
+        onClick={() => setShowProfile(false)}
+      >
+        Edit Profile
+      </Link>
+
+      <button
+        onClick={handleLogout}
+      >
+        <i className="bi bi-box-arrow-right"></i>
+        {" "}
+        Logout
+      </button>
+       <button
+      className="btn btn-secondary mt-3"
+      onClick={() => setShowProfile(false)}
+    >
+      Close
+    </button>
+
+    </div>
+  )}
+    </>
   );
 }
 
